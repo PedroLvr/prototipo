@@ -1,0 +1,9 @@
+<ion-view view-title="Playlists">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="produto in produtos" href="#/app/produtos/{{produto.id}}">
+        {{ produto.nome }}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,33 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Novo Cadastro</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="sair()">Sair</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="cadastrar(dados)">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nome</span>
+                    <input type="text" ng-model="dados.nome">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input type="email" ng-model="dados.email">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Endereço</span>
+                    <input type="text" ng-model="dados.endereco">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Senha</span>
+                    <input type="password" ng-model="dados.senha">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Cadastrar</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>
