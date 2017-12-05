@@ -1,6 +1,6 @@
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-    .run(function ($ionicPlatform, $rootScope) {
+    .run(function ($ionicPlatform, $rootScope, $state, $ionicHistory) {
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -11,10 +11,35 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             }
         });
 
-
         // inicializar produtos
         $rootScope.produtos = produtosLoja;
         $rootScope.sessao = sessao;
+
+        // evento para voltar para o inicio
+        $rootScope.$on('logout', function () {
+            setTimeout(function(){
+                $ionicHistory.nextViewOptions({
+                    disableBack: true,
+                    historyRoot: true
+                });
+                $state.go('app.produtos')
+                .then(function(res) {
+                    $ionicHistory.clearCache();
+                    $ionicHistory.clearHistory();
+                    $ionicHistory.nextViewOptions({
+                        disableBack: false,
+                        historyRoot: false
+                    });
+                }, function(err){
+                    console.log(err);
+                });
+
+            });
+        })
+
+        // verificar sessao
+        $rootScope.sessao.verificarSessao();
+        $rootScope.$broadcast('logout');
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -33,11 +58,20 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                     }
                 }
             })
-            .state('app.browse', {
-                url: '/browse',
+            .state('app.pedidos', {
+                url: '/pedidos',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/browse.html'
+                    }
+                }
+            })
+            .state('app.carrinho', {
+                url: '/carrinho',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/carrinho.html',
+                        controller: 'CarrinhoCtrl'
                     }
                 }
             })
