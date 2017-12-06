@@ -1,6 +1,6 @@
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-    .run(function ($ionicPlatform, $rootScope, $state, $ionicHistory) {
+    .run(function ($ionicPlatform, $rootScope, $state, $ionicHistory, $ionicPopup) {
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -33,9 +33,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 }, function(err){
                     console.log(err);
                 });
-
             });
-        })
+        });
+        
+        // mensagens popup
+        $rootScope.$on('alerta', function (event, mensagem) {
+            $ionicPopup.alert({
+                title: 'Alerta!',
+                template: mensagem || ''
+            });
+        });
 
         // verificar sessao
         $rootScope.sessao.verificarSessao();

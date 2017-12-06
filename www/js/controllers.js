@@ -24,10 +24,15 @@ angular.module('starter.controllers', [])
             var usuario = Usuario.login(dados.email, dados.senha);
             if(usuario) {
                 console.log("Login realizado com sucesso!");
+                $scope.dados = {};
                 sessao.login(new Usuario(usuario));
                 $scope.sair();
+                setTimeout(function(){
+                    $rootScope.$broadcast('alerta', 'Login realizado com sucesso!');
+                }, 500);
             } else {
                 console.log("Usuário ou senha incorretos!");
+                $rootScope.$broadcast('alerta', 'Usuário ou senha incorretos!');
             }
         };
 
@@ -46,8 +51,12 @@ angular.module('starter.controllers', [])
                 console.log("Cadastro realizado com sucesso!");
                 $scope.dados = {};
                 this.sair();
+                setTimeout(function(){
+                    $rootScope.$broadcast('alerta', 'Cadastro realizado com sucesso!<br/>Faça login agora.');
+                }, 500);
             } else {
                 console.log("Email já cadastrado!");
+                $rootScope.$broadcast('alerta', 'Email já cadastrado!');
             }
         };
 
@@ -62,14 +71,19 @@ angular.module('starter.controllers', [])
         $scope.logout = function() {
             sessao.logout();
             $rootScope.$broadcast('logout');
+            $rootScope.$broadcast('alerta', 'Logout realizado com sucesso!');
         }
     })
 
-    .controller('ProdutosCtrl', function ($scope, $rootScope) {
+    .controller('ProdutosCtrl', function ($scope, $rootScope, $state) {
         $scope.produtos = $rootScope.produtos;
+
+        $scope.verProduto = function(idProduto) {
+            $state.go('app.produto', {idProduto: idProduto});
+        }
     })
 
-    .controller('ProdutoCtrl', function ($scope, $rootScope, $stateParams, $ionicModal) {
+    .controller('ProdutoCtrl', function ($scope, $rootScope, $ionicHistory, $stateParams, $ionicModal) {
         // FILTRAR PRODUTO
         var idProduto = $stateParams.idProduto;
         var produtos = $rootScope.produtos;
@@ -95,9 +109,15 @@ angular.module('starter.controllers', [])
             var usuario = Usuario.login(dados.email, dados.senha);
             if(usuario) {
                 console.log("Login realizado com sucesso!");
+                $scope.dados = {};
                 sessao.login(new Usuario(usuario));
+                $scope.sair();
+                setTimeout(function(){
+                    $rootScope.$broadcast('alerta', 'Login realizado com sucesso!');
+                }, 500);
             } else {
                 console.log("Usuário ou senha incorretos!");
+                $rootScope.$broadcast('alerta', 'Usuário ou senha incorretos!');
             }
         };
         $scope.sair = function () {
@@ -110,12 +130,16 @@ angular.module('starter.controllers', [])
                 var resultado = sessao.usuario.addCarrinho(produto);
                 if(resultado) {
                     console.log("Produto adicionado com sucesso!");
+                    $rootScope.$broadcast('alerta', 'Produto adicionado com sucesso!');
                 } else {
                     console.log("Produto já está adicionado!");
+                    $rootScope.$broadcast('alerta', 'Este produto já está adicionado!');
                 }
+                $ionicHistory.goBack();
             } else {
                 console.log("Você precisa estar logado para adicionar ao carrinho!");
                 $scope.login();
+                $rootScope.$broadcast('alerta', 'Você precisa estar logado para adicionar ao carrinho!');
             }
 
             console.log(sessao.usuario)
@@ -145,8 +169,24 @@ angular.module('starter.controllers', [])
                 $scope.carrinho = sessao.usuario.carrinho;
                 var produtos = $scope.carrinho;
                 $scope.valorTotal = $scope.calcularTotal(produtos);
+                $rootScope.$broadcast('alerta', 'Produto removido com sucesso!');
             } else {
                 console.log("Produto não encontrado no carrinho!");
+                $rootScope.$broadcast('alerta', 'Produto não encontrado no carrinho!');
+            }
+        }
+
+        $scope.finalizar = function() {
+            var resultado = sessao.usuario.finalizarCarrinho();
+            if(resultado) {
+                console.log("Compra finalizada com sucesso!");
+                $scope.carrinho = sessao.usuario.carrinho;
+                var produtos = $scope.carrinho;
+                $scope.valorTotal = $scope.calcularTotal(produtos);
+                $rootScope.$broadcast('alerta', 'Compra finalizada com sucesso!');
+            } else {
+                console.log("Erro ao finalizar compra!");
+                $rootScope.$broadcast('alerta', 'Erro ao finalizar compra!');
             }
         }
     });

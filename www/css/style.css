@@ -1,1 +1,29 @@
 /* Empty. Add your own CSS if you like */
+
+.container-produtos {
+    display: flex;
+    flex-wrap: wrap;
+    background: #f4f4f4;
+}
+
+.container-produtos .card {
+    flex-basis: calc(50% - 10px);
+    width: calc(50% - 10px);
+    margin: 20px 5px;
+}
+
+.container-produtos .card h2 {
+    font-size: 1em;
+}
+
+.container-produtos .card p {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.container-produtos .card img {
+    display: block;
+    margin: auto;
+    max-width: 130px;
+    max-height: 130px;
+}

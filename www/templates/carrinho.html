@@ -1,11 +1,32 @@
-<ion-view view-title="Playlist">
+<ion-view view-title="Meu Carrinho">
     <ion-content>
-        <div ng-repeat="produto in carrinho">
-            <h1>{{ produto.nome }}</h1>
-            <h3>{{ produto.preco | currency }} </h3>
-            <button ng-click="rmCarrinho(produto)">Remover do Carrinho</button>
+        <!-- lista de produtos -->
+        <div class="card" ng-if="carrinho.length > 0">
+            <div class="item item-divider">
+                Meu Carrinho
+            </div>
+            <div class="item item-button-right" ng-repeat="produto in carrinho">
+                {{ produto.nome }} - {{ produto.preco | currency:'R$ ':2 }}
+                <button class="button button-assertive" ng-click="rmCarrinho(produto)">
+                    <i class="icon ion-close-round"></i>
+                </button>
+            </div>
         </div>
-        <div> {{ valorTotal | currency }} </div>
-        <button ng-click="finalizar()">Finalizar Compra</button>
+
+        <!-- fallback produtos -->
+        <div class="card" ng-if="carrinho.length === 0">
+            <div class="item">
+                Nenhum Produto no Carrinho! :/
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item" style="font-size: 1.4em;">
+                Valor Total: <span style="font-size: 1.8rem; color: #777;">{{ valorTotal | currency:'R$ ':2 }}</span>
+            </div>
+            <div class="item">
+                <button class="button button-positive button-block" ng-click="finalizar()" ng-disabled="carrinho.length === 0">Finalizar Compra</button>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

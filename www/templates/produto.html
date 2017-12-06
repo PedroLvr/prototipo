@@ -1,8 +1,18 @@
-<ion-view view-title="Playlist">
+<ion-view view-title="{{ produto.nome }}">
     <ion-content>
-        <h1>{{ produto.nome }}</h1>
-        <h3>{{ produto.preco | currency }} </h3>
-
-        <button ng-click="addCarrinho(produto)">Adicionar ao Carrinho</button>
+        <div class="list card">
+            <div class="item">
+                <h2 style="font-size: 1.2em;">{{ produto.nome }}</h2>
+                <p style="font-size: 1.4em; margin-top: 8px;">{{ produto.preco | currency:'R$ ':2 }}</p>
+            </div>
+            <div class="item item-body">
+                <img class="full-image" src="/img/produto.svg">
+            </div>
+            <button class="button button-dark"
+            style="display: block; width: 95%; margin: 10px auto;"
+            ng-click="addCarrinho(produto)">
+                Adicionar ao Carrinho
+            </button>
+        </div>
     </ion-content>
 </ion-view>

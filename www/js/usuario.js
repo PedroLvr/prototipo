@@ -48,6 +48,12 @@ Usuario.prototype.rmCarrinho = function(produto) {
     return false;
 }
 
+Usuario.prototype.finalizarCarrinho = function(){
+    this.carrinho = [];
+    Usuario.alterar(this);
+    return true;
+} 
+
 Usuario.cadastrar = function(dados) {
     var usuario = new Usuario(dados);
     var usuarios = JSON.parse(window.localStorage.getItem('usuarios'));

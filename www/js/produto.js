@@ -39,7 +39,7 @@ var produtosLoja = [
         preco: 150, 
         descricao: '', 
         img: '', 
-        categoria: 'eq' 
+        categoria: 'asses' 
     }),
     new Produto({ 
         id: 5, 
@@ -47,7 +47,7 @@ var produtosLoja = [
         preco: 870, 
         descricao: '', 
         img: '', 
-        categoria: 'eq' 
+        categoria: 'asses' 
     }),
     new Produto({ 
         id: 6, 
@@ -59,17 +59,50 @@ var produtosLoja = [
     }),
     new Produto({ 
         id: 7, 
-        nome: 'Teclado', preco: 130, descricao: '', img: '', categoria: 'perif' }),
+        nome: 'Teclado',
+        preco: 130,
+        descricao: '',
+        img: '',
+        categoria: 'perif'
+    }),
     new Produto({ 
         id: 8, 
-        nome: 'Mouse', preco: 95, descricao: '', img: '', categoria: 'perif' }),
+        nome: 'Mouse',
+        preco: 95,
+        descricao: '', 
+        img: '', 
+        categoria: 'perif' 
+    }),
     new Produto({ 
         id: 9, 
-        nome: 'Mochila', preco: 100, descricao: '', img: '', categoria: 'asses' }),
+        nome: 'Mochila', 
+        preco: 100, 
+        descricao: '', 
+        img: '', 
+        categoria: 'asses' 
+    }),
     new Produto({ 
         id: 10, 
-        nome: 'PS4', preco: 1800, descricao: '', img: '', categoria: 'cons' }),
+        nome: 'PS4', 
+        preco: 1800, 
+        descricao: '', 
+        img: '', 
+        categoria: 'cons' 
+    }),
     new Produto({ 
         id: 11, 
-        nome: 'XBOX ONE', preco: 1600, descricao: '', img: '', categoria: 'cons' })
+        nome: 'XBOX ONE', 
+        preco: 1600, 
+        descricao: '', 
+        img: '', 
+        categoria: 'cons' 
+    }),
+    new Produto({ 
+        id: 12, 
+        nome: 'Caixa de Som', 
+        preco: 67, 
+        descricao: '', 
+        img: '', 
+        categoria: 'perif' 
+    })
 ];
